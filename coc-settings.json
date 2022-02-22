@@ -1,14 +1,7 @@
 {
-  "eslint.enable": true,
   "eslint.autoFixOnSave": true,
   "eslint.run": "onType",
   "tsserver.formatOnType": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
   "prettier.disableSuccessMessage": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
@@ -28,10 +21,6 @@
     "v": "action:vsplit",
     "s": "action:split"
   },
-  "list.source.grep.excludePatterns": [
-    "**/node_modules/*",
-    "**/.git/*",
-    "*.lock",
-    "**/yarn.lock"
-  ]
-}
+  "list.source.files.excludePatterns": ["**/node_modules/**",
+    "**/node_modules/**/.*", "**/node_modules/**/.*/**", "**/*.d.ts",
+    "**/.git/*", "**/.git/**/*", "**/coverage/**", "**/public/**"]

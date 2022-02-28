@@ -5,13 +5,18 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'victorze/foo'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tomasiser/vim-code-dark'
+Plug 'neoclide/jsonc.vim'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
 set termguicolors
-colorscheme codedark
+colorscheme purify
 set number relativenumber
 set shiftwidth=2
 set tabstop=2
@@ -20,6 +25,13 @@ set tw=80
 set belloff=all
 set laststatus=2
 set hidden
+set signcolumn=yes " always show sign column
+set shortmess+=c " don't pass msgs to ins-complete-menu
+set updatetime=300 " should help improve lag
+set cmdheight=2 " more space for displaying msgs
+set encoding=utf-8 " internal encoding of vim
+set re=0 " disable regex which breaks highlighting
+set clipboard=unnamed " add support for the Mac OS X clipboard
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
@@ -45,11 +57,6 @@ endfunction
 autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
 
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
-
 autocmd InsertEnter * set timeoutlen=200
 autocmd InsertLeave * set timeoutlen=1000
 
@@ -57,6 +64,7 @@ nnoremap <silent><c-p> :<C-u>CocList files<CR>
 nnoremap <silent><Leader>f :<C-u>CocList grep<CR>
 nnoremap <silent><Leader>b :<C-u>CocList buffers<CR>
 
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -65,6 +73,19 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 nmap <leader>do <Plug>(coc-codeaction)
+
+" show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 " grep word under cursor
 command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
@@ -95,7 +116,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 noremap <Leader>,ftd :filetype detect
  
 " look up highlight grouping
@@ -129,6 +149,17 @@ if &term =~ '^xterm'
 	augroup END
 endif
 
+" airline colors
+let g:airline_theme='purify'
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
+filetype plugin indent on
+syntax on
+
 " dark red
 hi tsxTagName guifg=#E06C75
 hi tsxComponentName guifg=#E06C75
@@ -153,10 +184,5 @@ hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
-" set filetypes as typescript.tsx
-" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-
-filetype plugin indent on
-syntax on
+"Visual Select Background
+hi Visual ctermfg=237 guibg=#8895b3

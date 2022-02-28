@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'sheerun/vim-polyglot'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'victorze/foo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'

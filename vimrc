@@ -1,12 +1,14 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'victorze/foo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rhubarb'
 Plug 'tomasiser/vim-code-dark'
 Plug 'neoclide/jsonc.vim'
 Plug 'kyoz/purify', { 'rtp': 'vim' }
@@ -16,7 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 set termguicolors
-colorscheme purify
+colorscheme codedark
 set number relativenumber
 set shiftwidth=2
 set tabstop=2
@@ -33,6 +35,13 @@ set encoding=utf-8 " internal encoding of vim
 set re=0 " disable regex which breaks highlighting
 set clipboard=unnamed " add support for the Mac OS X clipboard
 set mouse=a " enable mouse for scrolling info windows
+
+" vim-fugitive
+noremap <leader>ge :Git blame<CR>
+noremap <leader>gs :Git status<CR>
+noremap <leader>gc :Git commit<CR>
+noremap <leader>gl :Git pull<CR>
+noremap <leader>gh :Git push<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
@@ -151,7 +160,7 @@ if &term =~ '^xterm'
 endif
 
 " airline colors
-let g:airline_theme='purify'
+let g:airline_theme='codedark'
 
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
@@ -162,23 +171,23 @@ filetype plugin indent on
 syntax on
 
 " dark red
-hi tsxTagName guifg=#E06C75
-hi tsxComponentName guifg=#E06C75
-hi tsxCloseComponentName guifg=#E06C75
+hi tsxTagName guifg=#E06C75 ctermfg=DarkRed
+hi tsxComponentName guifg=#E06C75 ctermfg=DarkRed
+hi tsxCloseComponentName guifg=#E06C75 ctermfg=DarkRed
 
 " orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxCloseTagName guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
+hi tsxCloseString guifg=#F99575 ctermfg=214
+hi tsxCloseTag guifg=#F99575 ctermfg=214
+hi tsxCloseTagName guifg=#F99575 ctermfg=214
+hi tsxAttributeBraces guifg=#F99575 ctermfg=214
+hi tsxEqual guifg=#F99575 ctermfg=214
 
 " yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
+hi tsxAttrib guifg=#F8BD7F cterm=italic ctermfg=Yellow
 
-hi ReactState guifg=#C176A7
-hi ReactProps guifg=#D19A66
-hi ApolloGraphQL guifg=#CB886B
+" pink
+hi ReactState guifg=#C176A7 ctermfg=Magenta
+hi ReactProps guifg=#D19A66 ctermfg=Brown
 hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
@@ -186,4 +195,5 @@ hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 "Visual Select Background
-hi Visual ctermfg=237 guibg=#8895b3
+" hi Visual ctermfg=237 guibg=#8895b3
+

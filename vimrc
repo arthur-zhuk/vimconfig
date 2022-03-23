@@ -32,6 +32,7 @@ set cmdheight=2 " more space for displaying msgs
 set encoding=utf-8 " internal encoding of vim
 set re=0 " disable regex which breaks highlighting
 set clipboard=unnamed " add support for the Mac OS X clipboard
+set mouse=a " enable mouse for scrolling info windows
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'

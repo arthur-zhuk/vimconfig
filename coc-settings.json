@@ -19,5 +19,16 @@
     "t": "action:tabe",
     "v": "action:vsplit",
     "s": "action:split"
-  }
+  },
+  "list.source.files.excludePatterns": [
+    "**/node_modules/**",
+    "**/node_modules/**/.*",
+    "**/node_modules/**/.*/**",
+    "**/*.d.ts",
+    "**/.git/*",
+    "**/.git/**/*",
+    "**/coverage/**",
+    "**/src/assets/**",
+    "**/public/**"
+  ]
 }

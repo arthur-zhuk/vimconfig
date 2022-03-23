@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-" Plug 'peitalin/vim-jsx-typescript'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
@@ -9,17 +8,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rhubarb'
-Plug 'bignimbus/pop-punk.vim'
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'neoclide/jsonc.vim'
-Plug 'kyoz/purify', { 'rtp': 'vim' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'HerringtonDarkholme/yats.vim'
 
 call plug#end()
 
-set termguicolors
-colorscheme pop-punk
+" set termguicolors
+" colorscheme pop-punk
+autocmd vimenter * ++nested colorscheme PaperColor
 set number relativenumber
 set shiftwidth=2
 set tabstop=2
@@ -161,7 +161,7 @@ if &term =~ '^xterm'
 endif
 
 " airline colors
-let g:airline_theme='pop_punk'
+let g:airline_theme='papercolor'
 
 " set filetypes as typescript.tsx
 " autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
@@ -170,31 +170,3 @@ let g:airline_theme='pop_punk'
 
 filetype plugin indent on
 syntax on
-
-" dark red
-" hi tsxTagName guifg=#E06C75 ctermfg=DarkRed
-" hi tsxComponentName guifg=#E06C75 ctermfg=DarkRed
-" hi tsxCloseComponentName guifg=#E06C75 ctermfg=DarkRed
-
-" orange
-" hi tsxCloseString guifg=#F99575 ctermfg=214
-" hi tsxCloseTag guifg=#F99575 ctermfg=214
-" hi tsxCloseTagName guifg=#F99575 ctermfg=214
-" hi tsxAttributeBraces guifg=#F99575 ctermfg=214
-" hi tsxEqual guifg=#F99575 ctermfg=214
-
-" yellow
-" hi tsxAttrib guifg=#F8BD7F cterm=italic ctermfg=Yellow
-
-" pink
-" hi ReactState guifg=#C176A7 ctermfg=Magenta
-" hi ReactProps guifg=#D19A66 ctermfg=Brown
-" hi Events ctermfg=204 guifg=#56B6C2
-" hi ReduxKeywords ctermfg=204 guifg=#C678DD
-" hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
-" hi WebBrowser ctermfg=204 guifg=#56B6C2
-" hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
-
-"Visual Select Background
-" hi Visual ctermfg=237 guibg=#8895b3
-

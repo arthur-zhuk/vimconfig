@@ -17,9 +17,10 @@ Plug 'HerringtonDarkholme/yats.vim'
 
 call plug#end()
 
-" set termguicolors
-" colorscheme pop-punk
-autocmd vimenter * ++nested colorscheme PaperColor
+set termguicolors
+set background=dark
+colorscheme PaperColor 
+" autocmd vimenter * ++nested colorscheme PaperColor
 set number relativenumber
 set shiftwidth=2
 set tabstop=2
@@ -163,10 +164,31 @@ endif
 " airline colors
 let g:airline_theme='papercolor'
 
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': { 
+  \       'override' : {
+  \         'color00' : ['#000000', '232'],
+  \         'color15' : ['#013220', '232'],
+  \         'linenumber_fg' : ['#FFFFFF', '232'],
+  \         'linenumber_bg' : ['#000000', '232'],
+  \         'search_fg' : ['#af005f', '232'],
+  \       }
+  \     }
+  \   }
+  \ }
+
 " set filetypes as typescript.tsx
-" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-" autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-" autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 
 filetype plugin indent on
 syntax on
+" Additional color highlighting for TS/JS/TSX/JSX
+hi! link typescriptImport jsImport
+hi! link typescriptExport jsExport
+hi! link typescriptVariableDeclaration typescriptDestructureVariable
+hi! link typescriptFuncCallArg typescriptDestructureVariable
+

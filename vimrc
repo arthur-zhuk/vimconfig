@@ -1,13 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'victorze/foo'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tomasiser/vim-code-dark'
 Plug 'theniceboy/nvim-deus'
 
 call plug#end()
@@ -32,12 +31,12 @@ set clipboard=unnamed " add support for the Mac OS X clipboard
 set mouse=a " enable mouse for scrolling info windows
 
 " vim-fugitive
-noremap <leader>ge :Git blame<CR>
-noremap <leader>gs :Git status<CR>
-noremap <leader>gc :Git commit<CR>
-noremap <leader>gl :Git pull<CR>
-noremap <leader>gh :Git push<CR>
-noremap <leader>ghh :Git push origin HEAD<CR>
+noremap <leader>ge :G blame<CR>
+noremap <leader>gs :G status<CR>
+noremap <leader>gc :G commit<CR>
+noremap <leader>gl :G pull<CR>
+noremap <leader>gh :G push<CR>
+noremap <leader>ghh :G push origin HEAD<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'

@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'victorze/foo'
@@ -19,7 +19,7 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 set tw=80
-" set belloff=all
+set belloff=all
 set laststatus=2
 set hidden
 set signcolumn=yes " always show sign column
@@ -29,6 +29,14 @@ set cmdheight=2 " more space for displaying msgs
 set encoding=utf-8 " internal encoding of vim
 set re=0 " disable regex which breaks highlighting
 set clipboard=unnamed " add support for the Mac OS X clipboard
+set mouse=a " enable mouse for scrolling info windows
+
+" vim-fugitive
+noremap <leader>ge :Git blame<CR>
+noremap <leader>gs :Git status<CR>
+noremap <leader>gc :Git commit<CR>
+noremap <leader>gl :Git pull<CR>
+noremap <leader>gh :Git push<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
@@ -53,10 +61,6 @@ endfunction
 
 autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
-
-" Jump to next eslint error
-nmap ]w <Plug>(coc-diagnostic-next)
-nmap [w <Plug>(coc-diagnostic-prev)
 
 autocmd InsertEnter * set timeoutlen=200
 autocmd InsertLeave * set timeoutlen=1000
@@ -150,35 +154,34 @@ if &term =~ '^xterm'
 	augroup END
 endif
 
-" dark red
-hi tsxTagName guifg=#E06C75
-hi tsxComponentName guifg=#E06C75
-hi tsxCloseComponentName guifg=#E06C75
+" airline colors
+let g:airline_theme='papercolor'
 
-" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxCloseTagName guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-
-" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
-
-hi ReactState guifg=#C176A7
-hi ReactProps guifg=#D19A66
-hi ApolloGraphQL guifg=#CB886B
-hi Events ctermfg=204 guifg=#56B6C2
-hi ReduxKeywords ctermfg=204 guifg=#C678DD
-hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
-hi WebBrowser ctermfg=204 guifg=#56B6C2
-hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': { 
+  \       'override' : {
+  \         'color00' : ['#000000', '232'],
+  \         'color15' : ['#013220', '232'],
+  \         'linenumber_fg' : ['#FFFFFF', '232'],
+  \         'linenumber_bg' : ['#000000', '232'],
+  \         'search_fg' : ['#af005f', '232'],
+  \       }
+  \     }
+  \   }
+  \ }
 
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
+
 filetype plugin indent on
 syntax on
+" Additional color highlighting for TS/JS/TSX/JSX
+hi! link typescriptImport jsImport
+hi! link typescriptExport jsExport
+hi! link typescriptVariableDeclaration typescriptDestructureVariable
+hi! link typescriptFuncCallArg typescriptDestructureVariable
 

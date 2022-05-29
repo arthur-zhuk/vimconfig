@@ -1,8 +1,11 @@
 {
   "eslint.autoFixOnSave": true,
   "eslint.run": "onType",
+  "javascript.suggest.autoImports": true,
   "tsserver.formatOnType": true,
-  "prettier.disableSuccessMessage": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+  "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",
@@ -11,10 +14,6 @@
     "javascriptreact",
     "typescriptreact"
   ],
-  "coc.preferences.formatOnType": true,
-  "typescript.suggest.autoImports": true,
-  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
-  "javascript.suggest.autoImports": true,
   "list.normalMappings": {
     "t": "action:tabe",
     "v": "action:vsplit",

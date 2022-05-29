@@ -37,6 +37,7 @@ noremap <leader>gs :Git status<CR>
 noremap <leader>gc :Git commit<CR>
 noremap <leader>gl :Git pull<CR>
 noremap <leader>gh :Git push<CR>
+noremap <leader>ghh :Git push origin HEAD<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
@@ -155,21 +156,7 @@ if &term =~ '^xterm'
 endif
 
 " airline colors
-let g:airline_theme='papercolor'
-
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': { 
-  \       'override' : {
-  \         'color00' : ['#000000', '232'],
-  \         'color15' : ['#013220', '232'],
-  \         'linenumber_fg' : ['#FFFFFF', '232'],
-  \         'linenumber_bg' : ['#000000', '232'],
-  \         'search_fg' : ['#af005f', '232'],
-  \       }
-  \     }
-  \   }
-  \ }
+let g:airline_theme='deus'
 
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

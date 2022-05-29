@@ -8,17 +8,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tomasiser/vim-code-dark'
+Plug 'theniceboy/nvim-deus'
 
 call plug#end()
 
 set termguicolors
-colorscheme codedark
+colorscheme deus
 set number relativenumber
 set shiftwidth=2
 set tabstop=2
 set expandtab
 set tw=80
-set belloff=all
+" set belloff=all
 set laststatus=2
 set hidden
 set signcolumn=yes " always show sign column
